@@ -29,13 +29,22 @@ public class Gun : MonoBehaviour
         {
             Debug.Log(hitinfo.transform.name);
 
+            /*
             Enemy enemy = hitinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
                 //Instantiate(impactEffect, hitinfo.point, Quaternion.LookRotation(hitinfo.normal));
+            }*/
 
+            changeColor change = hitinfo.transform.GetComponent<changeColor>();
+            if (change != null)
+            {
+                change.Changing(damage);
             }
+
+
+
 
         }
         

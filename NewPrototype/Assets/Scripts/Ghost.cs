@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class followPlayer : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
 
     public Transform target;
 
     public float speed = 1f;
-    public NavMeshAgent agent;
-    public bool follow = true; 
 
-    const float diff = 2f; 
+    const float diff = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +20,10 @@ public class followPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (follow == true)
+        transform.LookAt(target.position);
+        if ((transform.position - target.position).magnitude > diff)
         {
-            agent.SetDestination(target.position);
+            transform.Translate(0f, 0f, speed * Time.deltaTime);
         }
-    }
-
-    public void Stop()
-    {
-        follow = false; 
     }
 }

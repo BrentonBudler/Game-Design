@@ -45,4 +45,12 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime); 
 
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "ammo")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }

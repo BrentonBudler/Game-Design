@@ -10,26 +10,25 @@ public class followPlayer : MonoBehaviour
 
     public float speed = 1f;
     public NavMeshAgent agent;
-    public bool follow = true; 
 
-    const float diff = 2f; 
+    const float diff = 2f;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (follow == true)
-        {
-            agent.SetDestination(target.position);
-        }
+
+        agent.SetDestination(target.position);
+
     }
 
     public void Stop()
     {
-        follow = false; 
+        agent.isStopped = true; 
     }
+
 }

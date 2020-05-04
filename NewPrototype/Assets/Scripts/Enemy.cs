@@ -5,6 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float health = 50f;
+    public Animator leftArm;
+    public Animator rightArm;
+    public Animator leftLeg;
+    public Animator rightLeg;
+    public Animator body;
+    public Animator head;
 
 
     public void TakeDamage(float amount)
@@ -18,19 +24,27 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        followPlayer followP = GetComponentInParent<followPlayer>();
-        followP.Stop();
-        StartCoroutine(Dead());
-       // Destroy(gameObject);
-
+        followPlayer follow = GetComponentInParent<followPlayer>();
+        if (follow!=null)
+        {
+            follow.Stop();
+            leftArm.SetBool("stopped", true);
+            rightArm.SetBool("stopped", true);
+            leftLeg.SetBool("stopped", true);
+            rightLeg.SetBool("stopped", true);
+            body.SetBool("stopped", true);
+            head.SetBool("stopped", true);
+            Destroy(gameObject, 2f);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+       
     }
 
-    IEnumerator Dead()
-    {
-        yield return new WaitForSeconds(3f);
-        changeColor change = GetComponentInChildren<changeColor>();
-        change.Die();
-    }
+  
+
 
     
 }

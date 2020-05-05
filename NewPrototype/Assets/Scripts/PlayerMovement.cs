@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,10 +16,19 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 3f;
 
     public GameObject gun;
+    public GameObject died;
+    public bool dead;
 
     Vector3 velocity;
-    bool isGrounded; 
+    bool isGrounded;
 
+
+    private void Start()
+    {
+        Time.timeScale=1;
+        dead = false;
+        died.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -44,7 +54,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime); 
+        controller.Move(velocity * Time.deltaTime);
+
+        if (dead && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if (dead&& Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
 
     }
 
@@ -58,12 +78,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.tag== "Enemy")
         {
-            Debug.Log("YOU DIED BITCH");
-            Time.timeScale = 0;
+            Dying();
+            
             
         }
     }
 
+   public void Dying()
+    {
+        died.SetActive(true);
+        Time.timeScale = 0;
+        dead = true;
+    }
    
 
     

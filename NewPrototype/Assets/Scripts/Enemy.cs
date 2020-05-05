@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
             rightLeg.SetBool("stopped", true);
             body.SetBool("stopped", true);
             head.SetBool("stopped", true);
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
         }
         else
         {
@@ -48,7 +48,8 @@ public class Enemy : MonoBehaviour
             GhostBod.SetBool("dead",true);
             GhostLeftArm.SetBool("dead", true);
             GhostRightArm.SetBool("dead", true);
-            Destroy(gameObject,1f);
+
+            Destroy(gameObject,0.75f);
         }
        
     }

@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour
     public Animator rightLeg;
     public Animator body;
     public Animator head;
+    public AudioSource fallingBones;
+    public Animator GhostBod;
+    public Animator GhostLeftArm;
+    public Animator GhostRightArm;
 
 
     public void TakeDamage(float amount)
@@ -27,6 +31,7 @@ public class Enemy : MonoBehaviour
         followPlayer follow = GetComponentInParent<followPlayer>();
         if (follow!=null)
         {
+            fallingBones.Play();
             follow.Stop();
             leftArm.SetBool("stopped", true);
             rightArm.SetBool("stopped", true);
@@ -34,11 +39,16 @@ public class Enemy : MonoBehaviour
             rightLeg.SetBool("stopped", true);
             body.SetBool("stopped", true);
             head.SetBool("stopped", true);
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 3f);
         }
         else
         {
-            Destroy(gameObject);
+            Ghost ghost = GetComponentInParent<Ghost>();
+            ghost.Stop();
+            GhostBod.SetBool("dead",true);
+            GhostLeftArm.SetBool("dead", true);
+            GhostRightArm.SetBool("dead", true);
+            Destroy(gameObject,1f);
         }
        
     }

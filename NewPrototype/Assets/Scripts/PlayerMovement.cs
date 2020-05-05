@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    public float jumpHeight = 3f; 
+    public float jumpHeight = 3f;
+
+    public GameObject gun;
 
     Vector3 velocity;
     bool isGrounded; 
@@ -48,9 +50,21 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "ammo")
+        if (collision.gameObject.tag == "Ammo")
         {
             Destroy(collision.gameObject);
+            gun.GetComponent<Gun>().pickupAmmo();
+        }
+
+        if (collision.gameObject.tag== "Enemy")
+        {
+            Debug.Log("YOU DIED BITCH");
+            Time.timeScale = 0;
+            
         }
     }
+
+   
+
+    
 }

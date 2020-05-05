@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class followPlayer : MonoBehaviour
 {
 
-    public Transform target;
+    Transform target;
 
     public float speed = 1f;
     public NavMeshAgent agent;
@@ -15,7 +15,8 @@ public class followPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        target = GameObject.Find("GroundCheck").transform;
+           
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class MenuScript : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class MenuScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && paused)
         {
-            Application.Quit();
+            SceneManager.LoadScene(0);
         }
         
 
